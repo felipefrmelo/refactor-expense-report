@@ -6,20 +6,21 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class ExpenseReportTest {
-    private ExpenseReport report = new ExpenseReport();
     private MockReportPrinter printer = new MockReportPrinter();
+    private ExpenseReport report = new ExpenseReport(printer);
+
     private Bill bill = new Bill();
 
     @Before
     public void setUp() {
-        report = new ExpenseReport();
         printer = new MockReportPrinter();
+        report = new ExpenseReport(printer);
         bill = new Bill();
     }
 
     @Test
     public void printEmpty() {
-        report.printReport(printer, bill);
+        report.printReport(bill);
 
         assertEquals(
                 "Expenses 9/12/2002\n" +
@@ -32,7 +33,7 @@ public class ExpenseReportTest {
     @Test
     public void printOneDinner() {
         bill.addExpense(new ExpenseDinner( 1678));
-        report.printReport(printer, bill);
+        report.printReport(bill);
 
         assertEquals(
                 "Expenses 9/12/2002\n" +
@@ -47,7 +48,7 @@ public class ExpenseReportTest {
     public void twoMeals() {
         bill.addExpense(new ExpenseDinner( 1000));
         bill.addExpense(new ExpenseBreakfast( 500));
-        report.printReport(printer, bill);
+        report.printReport(bill);
 
         assertEquals(
                 "Expenses 9/12/2002\n" +
@@ -65,7 +66,7 @@ public class ExpenseReportTest {
         bill.addExpense(new ExpenseDinner( 1000));
         bill.addExpense(new ExpenseBreakfast( 500));
         bill.addExpense(new ExpenseCarRental( 50000));
-        report.printReport(printer, bill);
+        report.printReport(bill);
 
         assertEquals(
                 "Expenses 9/12/2002\n" +
@@ -84,7 +85,7 @@ public class ExpenseReportTest {
         bill.addExpense(new ExpenseBreakfast( 1001));
         bill.addExpense(new ExpenseDinner( 5000));
         bill.addExpense(new ExpenseDinner( 5001));
-        report.printReport(printer, bill);
+        report.printReport(bill);
 
         assertEquals(
                 "Expenses 9/12/2002\n" +
