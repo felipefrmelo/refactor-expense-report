@@ -1,4 +1,5 @@
-package expenseReport;/*
+package expenseReport;
+/*
  * Created by IntelliJ IDEA.
  * User: Michael Feathers
  * Date: Jul 29, 2002
